@@ -95,13 +95,128 @@
 
 -- Drop existing tables, so you'll start fresh each time this script is run.
 -- TODO!
+DROP TABLE IF EXISTS movies;
+DROP TABLE IF EXISTS actors;
+DROP TABLE IF EXISTS studios;
+DROP TABLE IF EXISTS agents;
+DROP TABLE IF EXISTS roles;
 
 -- Create new tables, according to your domain model
 -- TODO!
+CREATE TABLE movies (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    movie_title TEXT,
+    year_released INTEGER,
+    MPAA_rating TEXT,
+    studios_id INTEGER
+);
+
+CREATE TABLE actors (
+    id INTEGER PRIMARY KEY AUTOINCREMENT, 
+    first_name TEXT,
+    last_name TEXT,
+    agents_id INTEGER
+);
+
+CREATE TABLE studios (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    studio_name TEXT
+);
+
+CREATE TABLE agents (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    first_name TEXT,
+    last_name TEXT
+);
+
+CREATE TABLE roles (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    movies_id INTEGER,
+    actors_id INTEGER,
+    character_name TEXT
+);
 
 -- Insert data into your database that reflects the sample data shown above
 -- Use hard-coded foreign key IDs when necessary
 -- TODO!
+INSERT INTO studios ( 
+studio_name 
+) 
+VALUES ( 
+"Warner Bros." 
+); 
+ 
+INSERT INTO movies ( 
+movie_title, 
+year_released, 
+MPAA_rating, 
+studios_id 
+) 
+VALUES ( 
+"Batman Begins", 
+2005, 
+"PG-13",
+1), 
+("The Dark Knight", 
+2008, 
+"PG-13",
+1), 
+("The Dark Knight Rises", 
+2012, 
+"PG-13", 
+1)
+; 
+
+INSERT INTO agents ( 
+first_name, 
+last_name
+) 
+VALUES ( 
+"Ari", 
+"Gold" 
+);
+
+INSERT INTO actors ( 
+first_name, 
+last_name, 
+agents_id
+) 
+VALUES
+("Christian", "Bale", 1),
+  ("Michael", "Caine", 1),
+  ("Liam", "Neeson", 1),
+  ("Katie", "Holmes", 1),
+  ("Gary", "Oldman", 1),
+  ("Heath", "Ledger", 1),
+  ("Aaron", "Eckhart", 1),
+  ("Maggie", "Gyllenhaal", 1),
+  ("Tom", "Hardy", 1),
+  ("Joseph", "Gordon-Levitt", 1),
+  ("Anne", "Hathaway", 1) 
+;
+ 
+INSERT INTO roles ( 
+movies_id, 
+actors_id, 
+character_name 
+) 
+VALUES 
+(1, 1, "Bruce Wayne"), 
+  (1, 2, "Alfred"), 
+  (1, 3, "Ra's Al Ghul"), 
+  (1, 4, "Rachel Dawes"), 
+  (1, 5, "Commissioner Gordon"), 
+  (2, 1, "Bruce Wayne"), 
+  (2, 6, "Joker"), 
+  (2, 7, "Harvey Dent"), 
+  (2, 2, "Alfred"), 
+  (2, 8, "Rachel Dawes"), 
+  (3, 1, "Bruce Wayne"), 
+  (3, 5, "Commissioner Gordon"), 
+  (3, 9, "Bane"), 
+  (3, 10, "John Blake"), 
+  (3, 11, "Selina Kyle")
+; 
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -110,6 +225,8 @@
 
 -- ***TODO!***
 -- The SQL statement for the movies output goes here.
+SELECT movie_title, year_released, MPAA_rating, studios_id
+FROM movies;
 
 -- Example output:
 -- Movies
@@ -126,6 +243,8 @@
 
 -- ***TODO!***
 -- The SQL statement for the cast output goes here.
+SELECT first_name, last_name, agents_id
+FROM actors;
 
 -- Example output:
 -- Top Cast
@@ -154,52 +273,11 @@
 
 -- ***TODO!***
 -- The SQL statement for the represented actor(s) output goes here.
+SELECT first_name, last_name
+FROM agents;
 
 -- Example output:
 -- Represented by agent
 -- ====================
 -- Christian Bale
 
-
-DROP TABLE IF EXISTS movies;
-DROP TABLE IF EXISTS actors;
-DROP TABLE IF EXISTS studios;
-DROP TABLE IF EXISTS agents;
-DROP TABLE IF EXISTS roles;
-
-CREATE TABLE movies (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    movie_title TEXT,
-    year_released INTEGER,
-    MPAA_rating INTEGER,
-    studios_id INTEGER
-);
-
-CREATE TABLE actors (
-    id INTEGER PRIMARY KEY AUTOINCREMENT, 
-    first_name TEXT,
-    last_name TEXT,
-    movies_id INTEGER,
-    character_protrayed TEXT,
-    agents_id INTEGER
-);
-
-CREATE TABLE studios (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    studio_name TEXT,
-    movies_produced TEXT
-);
-
-CREATE TABLE agents (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    first_name TEXT,
-    last_name TEXT,
-    actor_represented TEXT
-);
-
-CREATE TABLE roles (
-    id INTEGER PRIMARY KEY AUTOINCREMENT,
-    movies_id INTEGER,
-    actors_id INTEGER,
-    character_protrayed TEXT
-);
