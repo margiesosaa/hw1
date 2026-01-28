@@ -275,7 +275,7 @@ ORDER BY movies_id;
 SELECT actors.first_name, actors.last_name
 FROM actors
 INNER JOIN agents ON actors.agents_id = agents.id
-WHERE agents.first_name = "Margie" AND agents.last_name = "Sosa";
+LIMIT 1;
 
 -- Example output:
 -- Represented by agent
