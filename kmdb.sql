@@ -241,8 +241,8 @@ INNER JOIN studios ON movies.studios_id = studios.id;
 -- The SQL statement for the cast output goes here.
 SELECT movies.movie_title, actors.first_name, actors.last_name, roles.character_name
 FROM roles
-INNER JOIN movies on roles.movies_id = movies.id
-INNER JOIN actors on roles.actors_id = actors.id
+INNER JOIN movies ON roles.movies_id = movies.id
+INNER JOIN actors ON roles.actors_id = actors.id
 ORDER BY movies_id;
 
 -- Example output:
