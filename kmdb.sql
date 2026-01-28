@@ -225,8 +225,8 @@ VALUES
 
 -- ***TODO!***
 -- The SQL statement for the movies output goes here.
-SELECT movie_title, year_released, MPAA_rating, studios_id
-FROM movies;
+SELECT movie_title, year_released, MPAA_rating, studio_name
+FROM movies, studios;
 
 -- Example output:
 -- Movies
@@ -243,8 +243,10 @@ FROM movies;
 
 -- ***TODO!***
 -- The SQL statement for the cast output goes here.
-SELECT first_name, last_name, agents_id
-FROM actors;
+SELECT movies.movie_title, actors.first_name, actors.last_name, roles.character_name
+FROM roles
+INNER JOIN movies on roles.movies_id = movies.id
+INNER JOIN actors on roles.actors_id = actors.id;
 
 -- Example output:
 -- Top Cast
