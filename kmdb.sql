@@ -153,19 +153,10 @@ MPAA_rating,
 studios_id 
 ) 
 VALUES ( 
-"Batman Begins", 
-2005, 
-"PG-13",
-1), 
-("The Dark Knight", 
-2008, 
-"PG-13",
-1), 
-("The Dark Knight Rises", 
-2012, 
-"PG-13", 
-1)
-; 
+"Batman Begins", 2005, "PG-13", 1), 
+("The Dark Knight", 2008, "PG-13", 1), 
+("The Dark Knight Rises", 2012, "PG-13", 1
+); 
 
 INSERT INTO agents ( 
 first_name, 
@@ -181,42 +172,46 @@ first_name,
 last_name, 
 agents_id
 ) 
-VALUES
-("Christian", "Bale", 1),
-  ("Michael", "Caine", 1),
-  ("Liam", "Neeson", 1),
-  ("Katie", "Holmes", 1),
-  ("Gary", "Oldman", 1),
-  ("Heath", "Ledger", 1),
-  ("Aaron", "Eckhart", 1),
-  ("Maggie", "Gyllenhaal", 1),
-  ("Tom", "Hardy", 1),
-  ("Joseph", "Gordon-Levitt", 1),
-  ("Anne", "Hathaway", 1) 
-;
+VALUES (
+"Christian", "Bale", 1),
+("Michael", "Caine", 1),
+("Liam", "Neeson", 1),
+("Katie", "Holmes", 1),
+("Gary", "Oldman", 1),
+("Heath", "Ledger", 1),
+("Aaron", "Eckhart", 1),
+("Maggie", "Gyllenhaal", 1),
+("Tom", "Hardy", 1),
+("Joseph", "Gordon-Levitt", 1),
+("Anne", "Hathaway", 1
+);
  
 INSERT INTO roles ( 
 movies_id, 
 actors_id, 
 character_name 
 ) 
-VALUES 
-(1, 1, "Bruce Wayne"), 
-  (1, 2, "Alfred"), 
-  (1, 3, "Ra's Al Ghul"), 
-  (1, 4, "Rachel Dawes"), 
-  (1, 5, "Commissioner Gordon"), 
-  (2, 1, "Bruce Wayne"), 
-  (2, 6, "Joker"), 
-  (2, 7, "Harvey Dent"), 
-  (2, 2, "Alfred"), 
-  (2, 8, "Rachel Dawes"), 
-  (3, 1, "Bruce Wayne"), 
-  (3, 5, "Commissioner Gordon"), 
-  (3, 9, "Bane"), 
-  (3, 10, "John Blake"), 
-  (3, 11, "Selina Kyle")
-; 
+VALUES (
+1, 1, "Bruce Wayne"), 
+(1, 2, "Alfred"), 
+(1, 3, "Ra's Al Ghul"), 
+(1, 4, "Rachel Dawes"), 
+(1, 5, "Commissioner Gordon"), 
+(2, 1, "Bruce Wayne"), 
+(2, 6, "Joker"), 
+(2, 7, "Harvey Dent"), 
+(2, 2, "Alfred"), 
+(2, 8, "Rachel Dawes"), 
+(3, 1, "Bruce Wayne"), 
+(3, 5, "Commissioner Gordon"), 
+(3, 9, "Bane"), 
+(3, 10, "John Blake"), 
+(3, 11, "Selina Kyle"
+); 
+
+UPDATE actors
+SET agents_id = 1
+WHERE id = 1;
 
 -- Prints a header for the movies output
 .print "Movies"
@@ -225,8 +220,9 @@ VALUES
 
 -- ***TODO!***
 -- The SQL statement for the movies output goes here.
-SELECT movie_title, year_released, MPAA_rating, studio_name
-FROM movies, studios;
+SELECT movies.movie_title, movies.year_released, movies.MPAA_rating, studios.studio_name
+FROM movies
+INNER JOIN studios ON movies.studios_id = studios.id;
 
 -- Example output:
 -- Movies
@@ -246,7 +242,8 @@ FROM movies, studios;
 SELECT movies.movie_title, actors.first_name, actors.last_name, roles.character_name
 FROM roles
 INNER JOIN movies on roles.movies_id = movies.id
-INNER JOIN actors on roles.actors_id = actors.id;
+INNER JOIN actors on roles.actors_id = actors.id
+ORDER BY movies_id;
 
 -- Example output:
 -- Top Cast
@@ -275,8 +272,10 @@ INNER JOIN actors on roles.actors_id = actors.id;
 
 -- ***TODO!***
 -- The SQL statement for the represented actor(s) output goes here.
-SELECT first_name, last_name
-FROM agents;
+SELECT actors.first_name, actors.last_name
+FROM actors
+INNER JOIN agents ON actors.agents_id = agents.id
+WHERE agents.first_name = "Ari" AND agents.last_name = "Gold";
 
 -- Example output:
 -- Represented by agent
