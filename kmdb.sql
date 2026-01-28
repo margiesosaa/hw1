@@ -163,8 +163,8 @@ first_name,
 last_name
 ) 
 VALUES ( 
-"Ari", 
-"Gold" 
+"Margie", 
+"Sosa" 
 );
 
 INSERT INTO actors ( 
@@ -275,7 +275,7 @@ ORDER BY movies_id;
 SELECT actors.first_name, actors.last_name
 FROM actors
 INNER JOIN agents ON actors.agents_id = agents.id
-WHERE agents.first_name = "Ari" AND agents.last_name = "Gold";
+WHERE agents.first_name = "Margie" AND agents.last_name = "Sosa";
 
 -- Example output:
 -- Represented by agent
